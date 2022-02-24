@@ -1,27 +1,62 @@
 import socket
+import sys
+
 if __name__ == "__main__":
     try:
-        ss: socket.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        ts1s: socket.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     except socket.error as err:
         print(f"socket open error: {err}\n")
         exit()
-    client_binding = ('', 32702)
-    ss.bind(client_binding)
-    ss.listen(1)
-    csockid, addr = ss.accept()
+    port = int(sys.argv[3])
+    rs_binding = (socket.gethostbyname(sys.argv[2]), port)
+    ts1s.connect(rs_binding)
+    ts1s.setblocking(False)
+    ts1s.settimeout(5)
 
-    ts1_binding = ('', 32703)
-    ss.bind(ts1_binding)
-    ss.listen(1)
-    ts1sockid, addr = ss.accept()
+    try:
+        ts2s: socket.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    except socket.error as err:
+        print(f"socket open error: {err}\n")
+        exit()
+    port = int(sys.argv[5])
+    rs_binding = (socket.gethostbyname(sys.argv[4]), port)
+    ts2s.connect(rs_binding)
+    ts2s.setblocking(False)
+    ts2s.settimeout(5)
 
-    # ts2_binding = ('', 32704)
-    # ss.bind(ts2_binding)
-    # ss.listen(1)
-    # ts2sockid, addr = ss.accept()
+    try:
+        rss: socket.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    except socket.error as err:
+        print(f"socket open error: {err}\n")
+        exit()
+    port = int(sys.argv[1])
+    rs_binding = ("", port)
+    rss.bind(rs_binding)
+    rss.listen(5)
+    csockid, addr = rss.accept()
+    csockid.setblocking(False)
+    csockid.settimeout(10)
 
-    while data := csockid.recv(4096):
-        csockid.send("random domain".encode())
-    
-    ss.close()
+    while True:
+        try:
+            host = csockid.recv(200).decode("utf-8")
+        except socket.timeout:
+            break
+
+        try:
+            ts1s.send(host.encode())
+            domain = ts1s.recv(200).decode("utf-8")
+        except socket.timeout:
+            try:
+                ts2s.send(host.encode())
+                domain = ts2s.recv(200).decode("utf-8")
+            except socket.timeout:
+                csockid.send(f"{host} - TIMED OUT".encode())
+                continue
+
+        csockid.send(domain.encode("utf-8"))
+
+    ts1s.close()
+    ts2s.close()
+    rss.close()
     exit()
