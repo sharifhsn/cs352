@@ -3,6 +3,9 @@ import signal
 import sys
 import random
 
+def dict_creation(src, dict_sep, pair_sep):
+    return dict([tuple(s.split(pair_sep)) for s in src.split(dict_sep)])
+
 # Read a command line argument for the port where the server
 # must run.
 port = 8080
@@ -61,16 +64,23 @@ signal.signal(signal.SIGINT, sigint_handler)
 # Read login credentials for all the users
 # Read secret data of all the users
 
+# login credentials are stored as a dictionary {username: password}
+with open("passwords.txt", "r") as f:
+    credentials = dict_creation(f.read().strip(), "\n", " ")
 
+# secret data is stored as a dictionary {username: secret}
+with open("secrets.txt", "r") as f:
+    secrets = dict_creation(f.read().strip(), "\n", " ")
 
+cookies = {}
 
 ### Loop to accept incoming HTTP connections and respond.
 while True:
     client, addr = sock.accept()
-    req = client.recv(1024)
+    req = client.recv(1024).decode("utf-8")
 
     # Let's pick the headers and entity body apart
-    header_body = req.split('\r\n\r\n'.encode())
+    header_body = req.split('\r\n\r\n')
     headers = header_body[0]
     body = '' if len(header_body) == 1 else header_body[1]
     print_value('headers', headers)
@@ -78,12 +88,49 @@ while True:
 
     # TODO: Put your application logic here!
     # Parse headers and body and perform various actions
-
+    fields = {} if body == '' else dict_creation(body, "&", "=")
+    # print(headers.split("\r\n")[1].split(": "))
+    headers_dict = dict_creation("\n".join(headers.split("\r\n")[1:]), "\n", ": ")
+    print(headers_dict)
     # You need to set the variables:
     # (1) `html_content_to_send` => add the HTML content you'd
     # like to send to the client.
     # Right now, we just send the default login page.
-    html_content_to_send = login_page
+    if "Cookie" in headers_dict.keys():
+        print("cookie found")
+        if headers_dict["Cookie"] in cookies.keys():
+            print("cookie good")
+            # Case C. Cookie validated
+            html_content_to_send = success_page + cookies[headers_dict["Cookie"]]
+        else:
+            print("cookie bad")
+            # Case D. Cookie invalid
+            html_content_to_send = bad_creds_page
+        headers_to_send = ""
+    elif "username" in fields.keys() and "password" in fields.keys():
+        print("username/password provided")
+        # username and password were both sent as part of the headers
+        if fields["username"] in credentials.keys() and credentials[fields["username"]] == fields["password"]:
+            print("successful login!")
+            # username and password field are correct, success
+            html_content_to_send = success_page + secrets[fields["username"]]
+            cookie = random.getrandbits(64)
+            headers_to_send = f"Set-Cookie: token={cookie}\r\n"
+            if cookie not in cookies.keys():
+                cookies.update({cookie:secrets[fields["username"]]})
+        else:
+            print("username/password is bad")
+            # either the username is not a valid username or the password is wrong
+            html_content_to_send = bad_creds_page
+            headers_to_send = ""
+    elif ("username" in fields.keys()) != ("password" in fields.keys()):
+        # either the username or the password fields (but not both) are missing
+        html_content_to_send = bad_creds_page
+        headers_to_send = ""
+    else:
+        # neither the username and password fields are in the headers
+        html_content_to_send = login_page
+        headers_to_send = ""
     # But other possibilities exist, including
     # html_content_to_send = success_page + <secret>
     # html_content_to_send = bad_creds_page
@@ -92,7 +139,6 @@ while True:
     # (2) `headers_to_send` => add any additional headers
     # you'd like to send the client?
     # Right now, we don't send any extra headers.
-    headers_to_send = ''
 
     # Construct and send the final response
     response  = 'HTTP/1.1 200 OK\r\n'
