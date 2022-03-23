@@ -1,21 +1,3 @@
-Here is the headers
-"""
-GET / HTTP/1.1
-Host: localhost:32702
-User-Agent: curl/7.68.0
-Accept: */*
-"""
-Here is the entity body
-"""
-
-"""
-{'Host': 'localhost:32702', 'User-Agent': 'curl/7.68.0', 'Accept': '*/*'}
-just login normally
-Here is the response
-"""
-HTTP/1.1 200 OK
-Content-Type: text/html
-
 <h1>Please login</h1>
    <form action = "http://localhost:32702" method = "post">
    Name: <input type = "text" name = "username">  <br/>
@@ -23,32 +5,6 @@ Content-Type: text/html
    <input type = "submit" value = "Submit" />
    </form>
 
-"""
-Served one request/connection!
-
-Here is the headers
-"""
-POST / HTTP/1.1
-Host: localhost:32702
-User-Agent: curl/7.68.0
-Accept: */*
-Content-Length: 30
-Content-Type: application/x-www-form-urlencoded
-"""
-Here is the entity body
-"""
-username=bezos&password=amazon
-"""
-{'Host': 'localhost:32702', 'User-Agent': 'curl/7.68.0', 'Accept': '*/*', 'Content-Length': '30', 'Content-Type': 'application/x-www-form-urlencoded'}
-username/password provided
-successful login!
-Here is the response
-"""
-HTTP/1.1 200 OK
-Set-Cookie: token=8744008235821613098
-Content-Type: text/html
-
-
    <h1>Welcome!</h1>
    <form action="http://localhost:32702" method = "post">
    <input type = "hidden" name = "action" value = "logout" />
@@ -56,31 +12,18 @@ Content-Type: text/html
    </form>
    <br/><br/>
    <h1>Your secret data is here:</h1>
-kaching
-"""
-Served one request/connection!
-
-Here is the headers
-"""
-POST / HTTP/1.1
-Host: localhost:32702
-User-Agent: curl/7.68.0
-Accept: */*
-Content-Length: 27
-Content-Type: application/x-www-form-urlencoded
-"""
-Here is the entity body
-"""
-username=some&password=none
-"""
-{'Host': 'localhost:32702', 'User-Agent': 'curl/7.68.0', 'Accept': '*/*', 'Content-Length': '27', 'Content-Type': 'application/x-www-form-urlencoded'}
-username/password provided
-username/password is bad
-Here is the response
-"""
-HTTP/1.1 200 OK
-Content-Type: text/html
-
+kaching<h1>Bad user/pass! Try again</h1>
+   <form action = "http://localhost:32702" method = "post">
+   Name: <input type = "text" name = "username">  <br/>
+   Password: <input type = "text" name = "password" /> <br/>
+   <input type = "submit" value = "Submit" />
+   </form>
+<h1>Bad user/pass! Try again</h1>
+   <form action = "http://localhost:32702" method = "post">
+   Name: <input type = "text" name = "username">  <br/>
+   Password: <input type = "text" name = "password" /> <br/>
+   <input type = "submit" value = "Submit" />
+   </form>
 <h1>Bad user/pass! Try again</h1>
    <form action = "http://localhost:32702" method = "post">
    Name: <input type = "text" name = "username">  <br/>
@@ -88,334 +31,46 @@ Content-Type: text/html
    <input type = "submit" value = "Submit" />
    </form>
 
-"""
-Served one request/connection!
-
-Here is the headers
-"""
-POST / HTTP/1.1
-Host: localhost:32702
-User-Agent: curl/7.68.0
-Accept: */*
-Content-Length: 28
-Content-Type: application/x-www-form-urlencoded
-"""
-Here is the entity body
-"""
-username=bezos&password=none
-"""
-{'Host': 'localhost:32702', 'User-Agent': 'curl/7.68.0', 'Accept': '*/*', 'Content-Length': '28', 'Content-Type': 'application/x-www-form-urlencoded'}
-username/password provided
-username/password is bad
-Here is the response
-"""
-HTTP/1.1 200 OK
-Content-Type: text/html
-
-<h1>Bad user/pass! Try again</h1>
+   <h1>Welcome!</h1>
+   <form action="http://localhost:32702" method = "post">
+   <input type = "hidden" name = "action" value = "logout" />
+   <input type = "submit" value = "Click here to logout" />
+   </form>
+   <br/><br/>
+   <h1>Your secret data is here:</h1>
+kaching
+   <h1>Welcome!</h1>
+   <form action="http://localhost:32702" method = "post">
+   <input type = "hidden" name = "action" value = "logout" />
+   <input type = "submit" value = "Click here to logout" />
+   </form>
+   <br/><br/>
+   <h1>Your secret data is here:</h1>
+kaching
+   <h1>Welcome!</h1>
+   <form action="http://localhost:32702" method = "post">
+   <input type = "hidden" name = "action" value = "logout" />
+   <input type = "submit" value = "Click here to logout" />
+   </form>
+   <br/><br/>
+   <h1>Your secret data is here:</h1>
+kaching
+   <h1>Welcome!</h1>
+   <form action="http://localhost:32702" method = "post">
+   <input type = "hidden" name = "action" value = "logout" />
+   <input type = "submit" value = "Click here to logout" />
+   </form>
+   <br/><br/>
+   <h1>Your secret data is here:</h1>
+kaching<h1>Logged out successfully</h1>
    <form action = "http://localhost:32702" method = "post">
    Name: <input type = "text" name = "username">  <br/>
    Password: <input type = "text" name = "password" /> <br/>
    <input type = "submit" value = "Submit" />
    </form>
-
-"""
-Served one request/connection!
-
-Here is the headers
-"""
-POST / HTTP/1.1
-Host: localhost:32702
-User-Agent: curl/7.68.0
-Accept: */*
-Content-Length: 14
-Content-Type: application/x-www-form-urlencoded
-"""
-Here is the entity body
-"""
-username=bezos
-"""
-{'Host': 'localhost:32702', 'User-Agent': 'curl/7.68.0', 'Accept': '*/*', 'Content-Length': '14', 'Content-Type': 'application/x-www-form-urlencoded'}
-you included only one of username/password
-Here is the response
-"""
-HTTP/1.1 200 OK
-Content-Type: text/html
-
-<h1>Bad user/pass! Try again</h1>
-   <form action = "http://localhost:32702" method = "post">
-   Name: <input type = "text" name = "username">  <br/>
-   Password: <input type = "text" name = "password" /> <br/>
-   <input type = "submit" value = "Submit" />
-   </form>
-
-"""
-Served one request/connection!
-
-Here is the headers
-"""
-GET / HTTP/1.1
-Host: localhost:32702
-User-Agent: curl/7.68.0
-Accept: */*
-Cookie: token=8744008235821613098
-"""
-Here is the entity body
-"""
-
-"""
-{'Host': 'localhost:32702', 'User-Agent': 'curl/7.68.0', 'Accept': '*/*', 'Cookie': 'token=8744008235821613098'}
-cookie found
-cookie good
-Here is the response
-"""
-HTTP/1.1 200 OK
-Content-Type: text/html
-
-
-   <h1>Welcome!</h1>
-   <form action="http://localhost:32702" method = "post">
-   <input type = "hidden" name = "action" value = "logout" />
-   <input type = "submit" value = "Click here to logout" />
-   </form>
-   <br/><br/>
-   <h1>Your secret data is here:</h1>
-kaching
-"""
-Served one request/connection!
-
-Here is the headers
-"""
-POST / HTTP/1.1
-Host: localhost:32702
-User-Agent: curl/7.68.0
-Accept: */*
-Cookie: token=8744008235821613098
-Content-Length: 27
-Content-Type: application/x-www-form-urlencoded
-"""
-Here is the entity body
-"""
-username=some&password=none
-"""
-{'Host': 'localhost:32702', 'User-Agent': 'curl/7.68.0', 'Accept': '*/*', 'Cookie': 'token=8744008235821613098', 'Content-Length': '27', 'Content-Type': 'application/x-www-form-urlencoded'}
-cookie found
-cookie good
-Here is the response
-"""
-HTTP/1.1 200 OK
-Content-Type: text/html
-
-
-   <h1>Welcome!</h1>
-   <form action="http://localhost:32702" method = "post">
-   <input type = "hidden" name = "action" value = "logout" />
-   <input type = "submit" value = "Click here to logout" />
-   </form>
-   <br/><br/>
-   <h1>Your secret data is here:</h1>
-kaching
-"""
-Served one request/connection!
-
-Here is the headers
-"""
-POST / HTTP/1.1
-Host: localhost:32702
-User-Agent: curl/7.68.0
-Accept: */*
-Cookie: token=8744008235821613098
-Content-Length: 30
-Content-Type: application/x-www-form-urlencoded
-"""
-Here is the entity body
-"""
-username=bezos&password=amazon
-"""
-{'Host': 'localhost:32702', 'User-Agent': 'curl/7.68.0', 'Accept': '*/*', 'Cookie': 'token=8744008235821613098', 'Content-Length': '30', 'Content-Type': 'application/x-www-form-urlencoded'}
-cookie found
-cookie good
-Here is the response
-"""
-HTTP/1.1 200 OK
-Content-Type: text/html
-
-
-   <h1>Welcome!</h1>
-   <form action="http://localhost:32702" method = "post">
-   <input type = "hidden" name = "action" value = "logout" />
-   <input type = "submit" value = "Click here to logout" />
-   </form>
-   <br/><br/>
-   <h1>Your secret data is here:</h1>
-kaching
-"""
-Served one request/connection!
-
-Here is the headers
-"""
-POST / HTTP/1.1
-Host: localhost:32702
-User-Agent: curl/7.68.0
-Accept: */*
-Cookie: token=8744008235821613098
-Content-Length: 30
-Content-Type: application/x-www-form-urlencoded
-"""
-Here is the entity body
-"""
-username=bezos&password=amazon
-"""
-{'Host': 'localhost:32702', 'User-Agent': 'curl/7.68.0', 'Accept': '*/*', 'Cookie': 'token=8744008235821613098', 'Content-Length': '30', 'Content-Type': 'application/x-www-form-urlencoded'}
-cookie found
-cookie good
-Here is the response
-"""
-HTTP/1.1 200 OK
-Content-Type: text/html
-
-
-   <h1>Welcome!</h1>
-   <form action="http://localhost:32702" method = "post">
-   <input type = "hidden" name = "action" value = "logout" />
-   <input type = "submit" value = "Click here to logout" />
-   </form>
-   <br/><br/>
-   <h1>Your secret data is here:</h1>
-kaching
-"""
-Served one request/connection!
-
-Here is the headers
-"""
-POST / HTTP/1.1
-Host: localhost:32702
-User-Agent: curl/7.68.0
-Accept: */*
-Cookie: token=8744008235821613098
-Content-Length: 30
-Content-Type: application/x-www-form-urlencoded
-"""
-Here is the entity body
-"""
-username=bezos&password=amazon
-"""
-{'Host': 'localhost:32702', 'User-Agent': 'curl/7.68.0', 'Accept': '*/*', 'Cookie': 'token=8744008235821613098', 'Content-Length': '30', 'Content-Type': 'application/x-www-form-urlencoded'}
-cookie found
-cookie good
-Here is the response
-"""
-HTTP/1.1 200 OK
-Content-Type: text/html
-
-
-   <h1>Welcome!</h1>
-   <form action="http://localhost:32702" method = "post">
-   <input type = "hidden" name = "action" value = "logout" />
-   <input type = "submit" value = "Click here to logout" />
-   </form>
-   <br/><br/>
-   <h1>Your secret data is here:</h1>
-kaching
-"""
-Served one request/connection!
-
-Here is the headers
-"""
-POST / HTTP/1.1
-Host: localhost:32702
-User-Agent: curl/7.68.0
-Accept: */*
-Cookie: token=8744008235821613098
-Content-Length: 13
-Content-Type: application/x-www-form-urlencoded
-"""
-Here is the entity body
-"""
-action=logout
-"""
-{'Host': 'localhost:32702', 'User-Agent': 'curl/7.68.0', 'Accept': '*/*', 'Cookie': 'token=8744008235821613098', 'Content-Length': '13', 'Content-Type': 'application/x-www-form-urlencoded'}
-logging out
-Here is the response
-"""
-HTTP/1.1 200 OK
-Set-Cookie: token=; expires=Thu, 01 Jan 1970 00:00:00 GMT
-Content-Type: text/html
-
 <h1>Logged out successfully</h1>
    <form action = "http://localhost:32702" method = "post">
    Name: <input type = "text" name = "username">  <br/>
    Password: <input type = "text" name = "password" /> <br/>
    <input type = "submit" value = "Submit" />
    </form>
-
-"""
-Served one request/connection!
-
-Here is the headers
-"""
-POST / HTTP/1.1
-Host: localhost:32702
-User-Agent: curl/7.68.0
-Accept: */*
-Content-Length: 30
-Content-Type: application/x-www-form-urlencoded
-"""
-Here is the entity body
-"""
-username=bezos&password=amazon
-"""
-{'Host': 'localhost:32702', 'User-Agent': 'curl/7.68.0', 'Accept': '*/*', 'Content-Length': '30', 'Content-Type': 'application/x-www-form-urlencoded'}
-username/password provided
-successful login!
-Here is the response
-"""
-HTTP/1.1 200 OK
-Set-Cookie: token=945217988671716896
-Content-Type: text/html
-
-
-   <h1>Welcome!</h1>
-   <form action="http://localhost:32702" method = "post">
-   <input type = "hidden" name = "action" value = "logout" />
-   <input type = "submit" value = "Click here to logout" />
-   </form>
-   <br/><br/>
-   <h1>Your secret data is here:</h1>
-kaching
-"""
-Served one request/connection!
-
-Here is the headers
-"""
-POST / HTTP/1.1
-Host: localhost:32702
-User-Agent: curl/7.68.0
-Accept: */*
-Cookie: token=945217988671716896
-Content-Length: 13
-Content-Type: application/x-www-form-urlencoded
-"""
-Here is the entity body
-"""
-action=logout
-"""
-{'Host': 'localhost:32702', 'User-Agent': 'curl/7.68.0', 'Accept': '*/*', 'Cookie': 'token=945217988671716896', 'Content-Length': '13', 'Content-Type': 'application/x-www-form-urlencoded'}
-logging out
-Here is the response
-"""
-HTTP/1.1 200 OK
-Set-Cookie: token=; expires=Thu, 01 Jan 1970 00:00:00 GMT
-Content-Type: text/html
-
-<h1>Logged out successfully</h1>
-   <form action = "http://localhost:32702" method = "post">
-   Name: <input type = "text" name = "username">  <br/>
-   Password: <input type = "text" name = "password" /> <br/>
-   <input type = "submit" value = "Submit" />
-   </form>
-
-"""
-Served one request/connection!
-
-Finishing up by closing listening socket...
