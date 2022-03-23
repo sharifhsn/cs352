@@ -117,18 +117,20 @@ while True:
             cookie = random.getrandbits(64)
             headers_to_send = f"Set-Cookie: token={cookie}\r\n"
             if cookie not in cookies.keys():
-                cookies.update({cookie:secrets[fields["username"]]})
+                cookies.update({f"token={cookie}":secrets[fields["username"]]})
         else:
             print("username/password is bad")
             # either the username is not a valid username or the password is wrong
             html_content_to_send = bad_creds_page
             headers_to_send = ""
     elif ("username" in fields.keys()) != ("password" in fields.keys()):
+        print("you included only one of username/password")
         # either the username or the password fields (but not both) are missing
         html_content_to_send = bad_creds_page
         headers_to_send = ""
     else:
         # neither the username and password fields are in the headers
+        print("just login normally")
         html_content_to_send = login_page
         headers_to_send = ""
     # But other possibilities exist, including
