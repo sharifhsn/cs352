@@ -96,7 +96,13 @@ while True:
     # (1) `html_content_to_send` => add the HTML content you'd
     # like to send to the client.
     # Right now, we just send the default login page.
-    if "Cookie" in headers_dict.keys():
+    
+    if "action" in fields.keys() and fields["action"] == "logout":
+        print("logging out")
+        # Case F. Logout
+        html_content_to_send = logout_page
+        headers_to_send = "Set-Cookie: token=; expires=Thu, 01 Jan 1970 00:00:00 GMT\r\n"
+    elif "Cookie" in headers_dict.keys():
         print("cookie found")
         if headers_dict["Cookie"] in cookies.keys():
             print("cookie good")
@@ -112,7 +118,7 @@ while True:
         # username and password were both sent as part of the headers
         if fields["username"] in credentials.keys() and credentials[fields["username"]] == fields["password"]:
             print("successful login!")
-            # username and password field are correct, success
+            # Case A. Username-password auth success
             html_content_to_send = success_page + secrets[fields["username"]]
             cookie = random.getrandbits(64)
             headers_to_send = f"Set-Cookie: token={cookie}\r\n"
@@ -120,16 +126,16 @@ while True:
                 cookies.update({f"token={cookie}":secrets[fields["username"]]})
         else:
             print("username/password is bad")
-            # either the username is not a valid username or the password is wrong
+            # Case B. Username-password auth failure
             html_content_to_send = bad_creds_page
             headers_to_send = ""
     elif ("username" in fields.keys()) != ("password" in fields.keys()):
         print("you included only one of username/password")
-        # either the username or the password fields (but not both) are missing
+        # Case B. Either one of username/password fields missing
         html_content_to_send = bad_creds_page
         headers_to_send = ""
     else:
-        # neither the username and password fields are in the headers
+        # basic case
         print("just login normally")
         html_content_to_send = login_page
         headers_to_send = ""
