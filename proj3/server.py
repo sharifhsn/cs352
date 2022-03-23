@@ -49,7 +49,11 @@ success_page = """
 #### Helper functions
 # Printing.
 def print_value(tag, value):
-    print(f"Here is the {tag}\n\"\"\"\n{value}\n\"\"\"")
+    print("Here is the " + tag)
+    print("\"\"\"")
+    print("Here is the " + value)
+    print("\"\"\"")
+    print()
 
 # Signal handler for graceful exit
 def sigint_handler(sig, frame):
@@ -121,9 +125,9 @@ while True:
             # Case A. Username-password auth success
             html_content_to_send = success_page + secrets[fields["username"]]
             cookie = random.getrandbits(64)
-            headers_to_send = f"Set-Cookie: token={cookie}\r\n"
+            headers_to_send = "Set-Cookie: token=" + str(cookie) + "\r\n"
             if cookie not in cookies.keys():
-                cookies.update({f"token={cookie}":secrets[fields["username"]]})
+                cookies.update({"token=" + str(cookie):secrets[fields["username"]]})
         else:
             print("username/password is bad")
             # Case B. Username-password auth failure
