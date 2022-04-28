@@ -50,10 +50,10 @@ class NetworkTopo ( Topo ):
     """ A linux router connecting 4 hosts in two IP subnets. """
     def build( self, **_opts ):
         r1 = self.addNode( 'r1', cls=LinuxRouter, ip=None )
-        h1 = self.addHost( 'h1', ip='10.0.0.1' )
-        h2 = self.addHost( 'h2', ip='192.168.0.1' )
-        h3 = self.addHost( 'h3', ip='10.0.0.3')
-        h4 = self.addHost( 'h4', ip='192.168.0.3' )
+        h1 = self.addHost( 'h1', ip=None )
+        h2 = self.addHost( 'h2', ip=None )
+        h3 = self.addHost( 'h3', ip=None)
+        h4 = self.addHost( 'h4', ip=None )
         self.addLink( h1, r1, intfName2='r1-eth1' )
         self.addLink( h2, r1, intfName2='r1-eth2' )
         self.addLink( h3, r1, intfName2='r1-eth3' )
