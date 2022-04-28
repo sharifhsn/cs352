@@ -10,3 +10,8 @@ r1 ip addr add 10.0.0.2 dev r1-eth1
 r1 ip addr add 192.168.0.2 dev r1-eth2
 r1 ip addr add 10.0.0.4 dev r1-eth3
 r1 ip addr add 192.168.0.4 dev r1-eth4
+
+h1 ip route add default via 10.0.0.1 dev h1-eth0
+h1 ip route add default via 192.168.0.1 dev h1-eth0
+h1 ip route add default via 10.0.0.3 dev h1-eth0
+h1 ip route add default via 192.168.0.3 dev h1-eth0
